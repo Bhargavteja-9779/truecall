@@ -2,7 +2,7 @@
 
 **TrustCall** is a Chrome extension that adds an on-device **deepfake risk badge** to every video tile (Meet/Zoom/Teams/etc.) and a **Dashboard** to verify snapshots with a lightweight ML model — all **offline** and **privacy-first** (no cloud).
 
-> ⚠️ Hackathon note: This is a demo prototype focused on UX + speed. It is **not** a forensic tool.
+
 
 ---
 
