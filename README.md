@@ -6,6 +6,10 @@ A Chrome extension that overlays an on-device **deepfake risk badge** on video t
 
 ---
 
+DATASETS USED:
+1)https://www.kaggle.com/datasets/kshitizbhargava/deepfake-face-images    (FOR XceptionNet Model)
+2)https://www.kaggle.com/datasets/sachchitkunichetty/rvf10k?utm_source=chatgpt.com   (FOR MobileNeV2 Model)
+
 ## ✨ Features
 
 - **Risk badge on every `<video>` tile**
