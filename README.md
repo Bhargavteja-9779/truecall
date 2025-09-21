@@ -4,7 +4,6 @@
 
 **Chrome extension** that overlays an on-device **deepfake risk badge** on live video tiles (Meet / Zoom / Teams / etc.) and a **Dashboard** that verifies snapshots with a lightweight ML model — all **offline** and **privacy-first** (no cloud).
 
-**Demo prototype** for a hackathon — focused on UI/UX + speed (not a forensic tool).
 
 </div>
 
