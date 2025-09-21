@@ -1,38 +1,24 @@
-const $ = s => document.querySelector(s);
+(async () => {
+  const toggle = document.getElementById('toggle');
+  const text = document.getElementById('stateText');
+  const btn = document.getElementById('openDash');
 
-const defaults = {
-  enabled: true,
-  demoMode: false,
-  fps: 5,
-  redThreshold: 60
-};
+  const { enabled = true } = await chrome.storage.sync.get({ enabled: true });
+  setUI(enabled);
 
-async function load() {
-  const cfg = await chrome.storage.sync.get(defaults);
-  $("#enabled").checked = cfg.enabled;
-  $("#demomode").checked = cfg.demoMode;
-  $("#fps").value = cfg.fps;
-  $("#fpsVal").textContent = cfg.fps;
-  $("#red").value = cfg.redThreshold;
-  $("#redVal").textContent = cfg.redThreshold;
-}
-
-$("#fps").addEventListener("input", e => $("#fpsVal").textContent = e.target.value);
-$("#red").addEventListener("input", e => $("#redVal").textContent = e.target.value);
-
-$("#apply").addEventListener("click", async () => {
-  await chrome.storage.sync.set({
-    enabled: $("#enabled").checked,
-    demoMode: $("#demomode").checked,
-    fps: +$("#fps").value,
-    redThreshold: +$("#red").value
+  toggle.addEventListener('click', async () => {
+    const { enabled = true } = await chrome.storage.sync.get({ enabled: true });
+    const next = !enabled;
+    await chrome.storage.sync.set({ enabled: next });
+    setUI(next);
   });
-  window.close();
-});
 
-$("#reset").addEventListener("click", async () => {
-  await chrome.storage.sync.set(defaults);
-  await load();
-});
+  btn.addEventListener('click', () => {
+    chrome.tabs.create({ url: chrome.runtime.getURL('dashboard.html') });
+  });
 
-load();
+  function setUI(on){
+    toggle.classList.toggle('on', on);
+    text.textContent = on ? 'Enabled' : 'Disabled';
+  }
+})();

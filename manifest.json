@@ -1,16 +1,20 @@
 {
   "manifest_version": 3,
   "name": "TrustCall — Deepfake Risk Badges",
-  "version": "0.1.0",
-  "description": "On-device multi-signal risk badges for live video tiles (Meet/Zoom/Teams). No cloud.",
-  "permissions": ["storage", "scripting", "activeTab"],
+  "version": "0.3.0",
+  "description": "On-device multi-signal risk + dashboard verification (no cloud).",
+  "permissions": ["storage", "scripting", "activeTab", "tabs"],
   "host_permissions": ["<all_urls>"],
+  "background": { "service_worker": "bg.js" },
   "action": { "default_title": "TrustCall", "default_popup": "popup.html" },
+  "options_page": "dashboard.html",
   "content_scripts": [
-    {
-      "matches": ["*://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ]
+    { "matches": ["*://*/*"], "js": ["content.js"], "run_at": "document_idle" }
+  ],
+  "web_accessible_resources": [
+    { "resources": ["onnx_model/*", "vendor/*"], "matches": ["<all_urls>"] }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+  }
 }

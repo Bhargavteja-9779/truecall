@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TrustCall Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="dashboard.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo">🛡️</span>
+          <div>
+            <h1>TrustCall Dashboard</h1>
+            <p class="sub">On-device verification (ONNX Runtime Web • WASM)</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="startCam">Start Webcam</button>
+          <button id="stopCam" class="ghost">Stop</button>
+          <label class="filebtn">
+            <input type="file" id="file" accept="image/*" hidden>
+            <span>Upload Image</span>
+          </label>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="panel">
+          <h2>Preview</h2>
+          <div id="drop" class="drop">
+            <img id="preview" alt="preview" />
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="frame" width="128" height="128"></canvas>
+            <div class="hint">Drag & Drop image • Webcam • or “Send Snapshot”</div>
+          </div>
+          <div class="row">
+            <button id="predict1">Predict (1 frame)</button>
+            <button id="predict5">Predict (5 frames avg)</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Result</h2>
+          <div class="card result">
+            <div id="modelStatus" class="chip">Loading model…</div>
+            <div class="verdict">
+              <div id="label" class="pill">—</div>
+              <div id="prob" class="big">—</div>
+            </div>
+            <div class="bars">
+              <div class="bar"><span>Probability (REAL)</span><i id="barProb" style="width:0%"></i></div>
+            </div>
+            <canvas id="spark" width="360" height="64"></canvas>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>History</h2>
+          <div id="history" class="history"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="vendor/ort.min.js"></script>
+    <script src="dashboard.js" defer></script>
+  </body>
+</html>
